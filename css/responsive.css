@@ -26,13 +26,13 @@
 	.banner_social_link li a:hover{
 		background: #fff !important;
 		border-color: #fff !important;
-		color: #ff4a57 !important;
+		color: #007bff !important;
 }
 	.banner-images img{
 		width: 80%;
 	}
 	.about_image img{
-		border: 5px solid #ff4a57 !important;
+		border: 5px solid #007bff !important;
 		width: 100%;
 		margin: 20px 0px 25px 0px;
 	}
@@ -82,7 +82,7 @@
 	.navbar-default .navbar-nav>.active>a, 
 	.navbar-default .navbar-nav>.active>a:hover,
 	.navbar-default .navbar-nav>.active>a:focus{
-		color: #f21e4e !important;
+		color: #007bff !important;
 		background-color: transparent;
 	}
 	.navbar-brand{
@@ -93,7 +93,7 @@
 		display: block !important;
 	}
 	.slicknav_btn {
-		background: #f21e4e;
+		background: #007bff;
 		border-radius: 0px;
 		margin: 0px 0 0;
 	}
@@ -178,7 +178,7 @@
 		padding: 15px 10px !important;
 		letter-spacing: 0.3px !important;
 		font-weight: 600 !important;
-		background: #ff4a57 !important;
+		background: #007bff !important;
 		line-height: 8px !important;
 		border: none !important;
 		-webkit-transition: all 0.4s ease-in-out !important;
