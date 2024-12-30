@@ -512,10 +512,10 @@ a:hover{
     [ 05 Start About ]
 -----------------------------------------------------------------*/
 .about_image img {
-    border-radius: 60%;
+    border-radius: 50%;
     display: block;
-    width: 500px; /* You can adjust the size */
-    height: 500px; /* Ensure the height and width are the same for a perfect circle */
+    width: 400px; /* You can adjust the size */
+    height: 400px; /* Ensure the height and width are the same for a perfect circle */
     object-fit: cover; /* Ensures the image covers the area without distortion */
     padding: 10px 90px 0px 80px;
 }
