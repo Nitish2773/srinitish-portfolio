@@ -23,7 +23,13 @@
 		  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 		<![endif]-->
-		
+	    <!-- JavaScript Libraries -->
+        <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2.4.1/dist/email.min.js"></script>
+        <script>
+            (function() {
+                emailjs.init("user_9X1Ni5kFXDxx7zZ4z"); // Replace with your EmailJS User ID
+            })();
+        </script>
 	</head>
 	<body data-spy="scroll" data-offset="80">
 		<!-- Preloader -->
@@ -847,8 +853,6 @@
 </section>
 
 
-		
-		<!-- START CONTACT -->
 <section id="contact" class="dark_bg section_padding">
     <div class="container">
         <div class="col-md-12 col-sm-12-col-xs-12">
@@ -860,26 +864,28 @@
 
         <div class="row">
             <div class="col-md-12 col-sm-12">
-                <form class="form" id="contact-form" name="enq" method="post" action="contact.php">
+                <form class="form" id="contact-form">
                     <div class="row">
                         <div class="form-group col-md-4">
-                            <input type="text" name="name" class="form-control requiredField" placeholder="Name" required="required">
+                            <input type="text" name="name" id="name" class="form-control requiredField" placeholder="Name" required>
                         </div>
                         <div class="form-group col-md-4">
-                            <input type="email" name="email" class="form-control requiredField email" placeholder="Email" required="required">
+                            <input type="email" name="email" id="email" class="form-control requiredField email" placeholder="Email" required>
                         </div>
                         <div class="form-group col-md-4">
-                            <input type="text" name="subject" class="form-control requiredField" placeholder="Subject" required="required">
+                            <input type="text" name="subject" id="subject" class="form-control requiredField" placeholder="Subject" required>
                         </div>
                         <div class="form-group col-md-12">
-                            <textarea rows="6" name="message" class="form-control requiredField" placeholder="Your Message" required="required"></textarea>
+                            <textarea rows="6" name="message" id="message" class="form-control requiredField" placeholder="Your Message" required></textarea>
                         </div>
                         <div class="col-md-12 text-center">
-                            <button type="submit" name="submit" class="btn btn-default main_btn">Send Message</button>
+                            <button type="submit" id="send-message" class="btn btn-default main_btn">Send Message</button>
                         </div>
                     </div>
                 </form>
                 <div id="loader" style="display:none;">Sending...</div>
+                <div id="success-message" style="display:none; color:green;">Thank you! Your email was sent successfully.</div>
+                <div id="error-message" style="display:none; color:red;">Oops! Something went wrong. Please try again later.</div>
             </div>
         </div>
     </div>
@@ -911,62 +917,30 @@
 		<script src="js/scrolltopcontrol.js"></script>
 		<script src="js/wow.min.js"></script>
 		<script src="js/main.js"></script>
-        <script>
-            $(document).ready(function() {
-                $('form#contact-form').submit(function(event) {
-                    event.preventDefault(); // Prevent the default form submission
-            
-                    $('form#contact-form .error').remove();
-                    var hasError = false;
-            
-                    $('.requiredField').each(function() {
-                        if (jQuery.trim($(this).val()) === '') {
-                            var labelText = $(this).prev('label').text();
-                            $(this).parent().append('<span class="error">You forgot to enter your ' + labelText + '</span>');
-                            $(this).addClass('inputError');
-                            hasError = true;
-                        } else if ($(this).hasClass('email')) {
-                            var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
-                            if (!emailReg.test(jQuery.trim($(this).val()))) {
-                                var labelText = $(this).prev('label').text();
-                                $(this).parent().append('<span class="error">You entered an invalid ' + labelText + '</span>');
-                                $(this).addClass('inputError');
-                                hasError = true;
-                            }
-                        }
-                    });
-            
-                    if (!hasError) {
-                        $('form#contact-form input.submit').fadeOut('normal', function() {
-                            $(this).parent().append('');
-                        });
-            
-                        $("#loader").show();
-            
-                        $.ajax({
-                            url: "contact.php",
-                            type: "POST",
-                            data: new FormData(this),
-                            contentType: false,
-                            cache: false,
-                            processData: false,
-                            success: function(data) {
-                                $('form#contact-form').slideUp("fast", function() {
-                                    $(this).before('<div class="success">Thank you. Your Email was sent successfully.</div>');
-                                    $("#loader").hide();
-                                });
-                            },
-                            error: function() {
-                                $('form#contact-form').before('<div class="error">Sorry, there was an error sending your message. Please try again later.</div>');
-                                $("#loader").hide();
-                            }
-                        });
-                    }
-            
-                    return false;
-                })
+        <!-- JavaScript to handle EmailJS -->
+<script>
+    document.getElementById('contact-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        document.getElementById('loader').style.display = 'block';
+        document.getElementById('success-message').style.display = 'none';
+        document.getElementById('error-message').style.display = 'none';
+
+        const serviceID = "service_vfjyyxx"; // Replace with your EmailJS Service ID
+        const templateID = "template_z1m267k"; // Replace with your EmailJS Template ID
+
+        emailjs.sendForm(serviceID, templateID, this)
+            .then(() => {
+                document.getElementById('loader').style.display = 'none';
+                document.getElementById('success-message').style.display = 'block';
+                document.getElementById('contact-form').reset();
+            }, (err) => {
+                document.getElementById('loader').style.display = 'none';
+                document.getElementById('error-message').style.display = 'block';
+                console.error(JSON.stringify(err));
             });
-            </script>
+    });
+</script>
             
 		<!-- End JQuery -->
 		
