@@ -1,4 +1,4 @@
-# Personal Portfolio with EmailJS Contact Form
+# Personal Portfolio 
 
 This project is a personal portfolio website designed to showcase skills, projects, certifications, and experiences. The contact form functionality has been integrated with **EmailJS**, enabling direct email communication without the need for a server-side backend.
 
